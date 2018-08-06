@@ -1,0 +1,27 @@
+{% extends 'DWCoreBundle::layout.html.twig' %}
+
+{% block nav %}
+    <a class="btn btn-secondary float-right" href="{{ path('dw_core_homepage') }}">Menu principal</a>
+{% endblock %}
+
+{% block body %}
+
+    <h1><em>{{ tavern.name }}</em></h1>
+
+    <hr>
+
+    <p> Ville :
+        <em>
+            <a href="{{ path('dw_core_town', {'id': tavern.town.id}) }}">{{ tavern.town.name }}</a>
+        </em>
+    </p>
+    <p>
+        Possède de la bière :
+
+        {% for beer in beers %}
+            {{ beer }}{% if not loop.last %}, {% else %}.{% endif %}
+        {% endfor %}
+
+    <p>{{ tavern.rooms }} chambres dont {{ dwarfCount }} occupées.</p>
+
+{% endblock %}

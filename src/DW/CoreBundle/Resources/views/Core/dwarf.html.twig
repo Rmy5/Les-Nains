@@ -1,0 +1,48 @@
+{% extends 'DWCoreBundle::layout.html.twig' %}
+
+{% block nav %}
+    <a class="btn btn-secondary float-right" href="{{ path('dw_core_homepage') }}">Menu principal</a>
+{% endblock %}
+
+{% block body %}
+
+    <h1><em>{{ dwarf.name }}</em></h1>
+
+    <hr>
+
+    <p>Barbe : {{ dwarf.beard }} cm.</p>
+
+    <p>Originiare de : <a href="{{ path('dw_core_town', {'id': dwarf.town.id}) }}">{{ dwarf.town.name }}</a>.</p>
+
+    {% if dwarf.gang.tavern is defined and dwarf.gang.tavern is not null %}
+        <p>Boit dans : {{ dwarf.gang.tavern.name }}.</p>
+    {% endif %}
+
+
+    {% if dwarf.gang.tunnel is defined and dwarf.gang.tunnel is not null %}
+        <p>
+            Travaille de <em>{{ dwarf.gang.workStart|date('H:i') }}</em> à <em>{{ dwarf.gang.workEnd|date('H:i') }}</em>,
+            dans le tunnel de
+            <em>
+                <a href="{{ path('dw_core_town', {'id': dwarf.gang.tunnel.startTown.id }) }}">{{ dwarf.gang.tunnel.startTown.name }}</a>
+            </em> à
+            <em>
+                <a href="{{ path('dw_core_town', {'id': dwarf.gang.tunnel.endTown.id }) }}">{{ dwarf.gang.tunnel.endTown.name }}</a>
+            </em>
+        </p>
+    {% endif %}
+
+    {% if dwarf.gang is defined and dwarf.gang  is not null %}
+        <p>Membre du
+            <em>
+                <a href="{{ path('dw_core_gang', {'id': dwarf.gang.id}) }}">groupe {{ dwarf.gang.id }}</a>.
+            </em></p>
+    {% else %}
+        <p>Pas de groupe.</p>
+    {% endif %}
+
+{% endblock %}
+
+
+
+

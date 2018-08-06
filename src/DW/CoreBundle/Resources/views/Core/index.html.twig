@@ -1,0 +1,76 @@
+{% extends 'DWCoreBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Les Nains</h1>
+    <hr>
+
+    <div class="btn-group mt-3">
+
+    {% if dwarves|length > 0 %}
+
+        <div class="dropdown col">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                Les Nains
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for dwarf in dwarves %}
+                    <a class="dropdown-item" href="{{ path('dw_core_dwarf', {'id': dwarf.id}) }}">{{ dwarf.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if towns|length > 0 %}
+
+        <div class="dropdown col">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                Les Villes
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% for town in towns %}
+                    <a class="dropdown-item" href="{{ path('dw_core_town', {'id': town.id}) }}">{{ town.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if gangs|length > 0 %}
+
+        <div class="dropdown col">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                Les Groupes
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for gang in gangs %}
+                    <a class="dropdown-item" href="{{ path('dw_core_gang', {'id': gang.id}) }}">Groupe {{ gang.id }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if taverns|length > 0 %}
+
+        <div class="dropdown col">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                Les Tavernes
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for tavern in taverns %}
+                    <a class="dropdown-item" href="{{ path('dw_core_tavern', {'id': tavern.id}) }}">{{ tavern.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endif %}
+
+    </div>
+
+{% endblock %}

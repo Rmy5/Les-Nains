@@ -1,0 +1,31 @@
+dw_core_homepage:
+    path:     /
+    defaults: { _controller: DWCoreBundle:Core:index }
+
+dw_core_dwarf:
+    path:     /dwarf/{id}
+    defaults:
+        _controller: DWCoreBundle:Core:dwarf
+    requirements:
+        id:   \d+
+
+dw_core_town:
+    path:     /town/{id}
+    defaults:
+        _controller: DWCoreBundle:Core:town
+    requirements:
+        id:   \d+
+
+dw_core_gang:
+    path:     /gang/{id}
+    defaults:
+        _controller: DWCoreBundle:Core:gang
+    requirements:
+        id:   \d+
+
+dw_core_tavern:
+    path:     /tavern/{id}
+    defaults:
+        _controller: DWCoreBundle:Core:tavern
+    requirements:
+        id:   \d+

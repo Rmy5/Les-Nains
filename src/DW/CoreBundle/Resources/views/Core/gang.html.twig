@@ -1,0 +1,57 @@
+{% extends 'DWCoreBundle::layout.html.twig' %}
+
+{% block nav %}
+    <a class="btn btn-secondary float-right" href="{{ path('dw_core_homepage') }}">Menu principal</a>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Groupe <em>{{ gang.id }}</em></h1>
+
+    <hr>
+
+    <p>Nains du groupe :</p>
+
+    <ul>
+        {% for dwarf in dwarves %}
+            <li><a href="{{ path('dw_core_dwarf', {'id': dwarf.id}) }}">{{ dwarf.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div>
+        Boivent dans :
+
+        {% if gang.tavern.name is defined and gang.tavern.name is not null %}
+            <a href="{{ path('dw_core_tavern', {'id': gang.tavern.id}) }}">{{ gang.tavern.name }}</a>.
+        {% else %}
+            aucune taverne.
+
+            <p>Tavernes recommandées :</p>
+
+            <ul>
+                {% for tavern in taverns %}
+                    <li><a href="{{ path('dw_core_tavern', {'id': tavern.id}) }}">{{ tavern.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+        {% endif %}
+    </div>
+
+    {% if gang.tunnel is not null %}
+
+            <p>
+                {{ gang.tunnel.progress < 100 ? 'Creusent' : 'Entretiennent'  }}
+                de {{ gang.workStart|date('H:i') }}h à {{ gang.workEnd|date('H:i') }}h
+                {{ gang.tunnel.progress < 100 ? 'dans ' : ''  }}le tunnel de
+                <em>
+                    <a href="{{ path('dw_core_town', {'id': gang.tunnel.startTown.id}) }}">
+                    {{ gang.tunnel.startTown.name }}</a>
+                </em> à
+                <em>
+                    <a href="{{ path('dw_core_town', {'id': gang.tunnel.endTown.id}) }}">
+                        {{ gang.tunnel.endTown.name }}</a>.
+                </em>
+            </p>
+    {% endif %}
+
+{% endblock %}

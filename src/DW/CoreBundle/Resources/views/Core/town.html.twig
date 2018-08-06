@@ -1,0 +1,54 @@
+{% extends 'DWCoreBundle::layout.html.twig' %}
+
+  {% block nav %}
+      <a class="btn btn-secondary float-right" href="{{ path('dw_core_homepage') }}">Menu principal</a>
+  {% endblock %}
+
+{% block body %}
+
+    <h1><em>{{ town.name }}</em></h1>
+
+    <hr>
+
+    <p>Supérficie : {{ town.area }} km2</p>
+
+    <p>Nains originaires :</p>
+    <ul>
+        {% for dwarf in dwarves %}
+            <li><a href="{{ path('dw_core_dwarf', {'id': dwarf.id}) }}">{{ dwarf.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <p>Tavernes:</p>
+    <ul>
+        {% for tavern in taverns %}
+            <li><a href="{{ path('dw_core_tavern', {'id': tavern.id}) }}">{{ tavern.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <p>Tunnels :</p>
+    <ul>
+        {% for stunnel in startTunnels %}
+            <li>
+                Tunnel vers : <a href="{{ path('dw_core_town', {'id': stunnel.endTown.id}) }}">{{ stunnel.endTown.name }}</a>
+                {% if stunnel.progress < 100 %}
+                    : progression : {{ stunnel.progress }} %
+                    {% else %}
+                    : tunnel ouvert.
+                {% endif %}
+            </li>
+        {% endfor %}
+
+        {% for etunnel in endTunnels %}
+            <li>
+                Tunnel vers : <a href="{{ path('dw_core_town', {'id': etunnel.startTown.id}) }}">{{ etunnel.startTown.name }}</a>
+                {% if etunnel.progress < 100 %}
+                    : progression : {{ etunnel.progress }} %
+                {% else %}
+                    : tunnel ouvert.
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
